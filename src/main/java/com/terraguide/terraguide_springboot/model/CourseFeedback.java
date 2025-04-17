@@ -1,0 +1,37 @@
+package com.terraguide.terraguide_springboot.model;
+
+import jakarta.persistence.*;
+import lombok.Data;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+@Entity
+@Table(name = "course_feedbacks")
+@Data
+public class CourseFeedback {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer id;
+
+  @ManyToOne
+  @JoinColumn(name = "course_id", nullable = false)
+  private Course course;
+
+  @ManyToOne
+  @JoinColumn(name = "park_guide_id", columnDefinition = "BINARY(16)", nullable = false)
+  private User parkGuide;
+
+  private Integer q1Score;
+  private Integer q2Score;
+  private Integer q3Score;
+  private Integer q4Score;
+
+  @Column(name = "submitted_dt")
+  private LocalDateTime submittedDt;
+
+  @PrePersist
+  public void prePersist() {
+    this.submittedDt = LocalDateTime.now();
+  }
+}
