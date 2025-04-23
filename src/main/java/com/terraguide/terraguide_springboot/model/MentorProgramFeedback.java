@@ -34,5 +34,4 @@ public class MentorProgramFeedback {
   public void prePersist() {
     this.submittedDt = LocalDateTime.now();
   }
-  // ... other fields
 }
